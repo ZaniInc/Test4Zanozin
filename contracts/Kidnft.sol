@@ -36,7 +36,10 @@ contract Kidnft is ERC721 {
 
     // Generate Kid Nft , take Level and Lastname from Family token
     function generateNftKid ( uint8 _age ,string memory _name  , famNFT nft , DadId dadAddress , MomId momAddress) public {
-        kidArray.push(Kid(_age,nft.getFamilyLevel(),_name,nft.getFamilyLastname(),dadAddress.ShowDadId(msg.sender),momAddress.ShowWomanId(msg.sender)));
+        kidArray.push(Kid(_age,nft.getFamilyLevel(),
+        _name,nft.getFamilyLastname(),
+        dadAddress.ShowDadId(msg.sender),
+        momAddress.ShowWomanId(msg.sender)));
     }
 
     // Show Kid Nft
