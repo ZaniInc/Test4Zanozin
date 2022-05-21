@@ -15,10 +15,17 @@ contract ManNft is ERC721 {
          string LastName;        
     }
 
-    Man [] family;
+    Man [] manNft;
 
-    function generateNft (uint8 age , uint8 level , string memory name , string memory lastname) public returns(Man memory) {
+    // Generate Nft Man
+    function generateNftMan (uint8 age , uint8 level , string memory _name , string memory lastname ) public returns(bool) {
+        manNft.push(Man(age,level,_name,lastname));
+        return true;
+    }
 
+    // Show Man nft token
+    function showMan() public view returns (Man [] memory) {
+        return manNft ;
     }
 
 }
