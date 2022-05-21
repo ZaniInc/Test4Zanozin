@@ -6,14 +6,14 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
 // Implementation ManNft functions
 interface Man {
-    function manLevel() external view returns (uint8) ;
+    function manLevel(uint256 manIdArray) external view returns (uint8) ;
 
-    function manLastname() external view returns (string memory) ;
+    function manLastname(uint256 manIdArray) external view returns (string memory) ;
 }
 
 // Implementation WomanNft functions
 interface Woman {
-    function womanLevel() external view returns (uint8) ;
+    function womanLevel(uint256 womanIdArray) external view returns (uint8) ;
 }
 
 contract NftFamily is ERC721 { 
@@ -28,11 +28,12 @@ contract NftFamily is ERC721 {
         string LastName;
     }
 
+    // Family tokens save here
     NFTFamily [] _familyTokens;
 
     // Generate token NFTfamily which contains level from parents and lastname from man
-    function createFamilyNFT (Man mannft , Woman womannft ) public {
-        _familyTokens.push(NFTFamily(1,(mannft.manLevel() + womannft.womanLevel()) / 2, mannft.manLastname())) ;
+    function createFamilyNFT (Man mannft , Woman womannft , uint256 womanIndexArray , uint256 manIndexArray) public {
+        _familyTokens.push(NFTFamily(1,(mannft.manLevel(manIndexArray) + womannft.womanLevel(womanIndexArray)) / 2, mannft.manLastname(manIndexArray))) ;
     }
 
     // show token NFTfamily
@@ -40,14 +41,14 @@ contract NftFamily is ERC721 {
         return _familyTokens;
     }
 
-    // Get Family token level to input in Kidnft
-    function getFamilyLevel () external view returns (uint8) {
-        return _familyTokens[0].Level;
+    // Get Family token level to input in Kidnft , take number of array index
+    function getFamilyLevel (uint256 familyTokenId) external view returns (uint8) {
+        return _familyTokens[familyTokenId].Level;
     }
 
-    // Get Family token lastname to input in Kidnft
-    function getFamilyLastname () external view returns (string memory) {
-        return _familyTokens[0].LastName;
+    // Get Family token lastname to input in Kidnft , take number of array index
+    function getFamilyLastname (uint256 familyTokenId) external view returns (string memory) {
+        return _familyTokens[familyTokenId].LastName;
     }
 
 }

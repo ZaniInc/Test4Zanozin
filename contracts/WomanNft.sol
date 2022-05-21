@@ -34,8 +34,8 @@ contract WomanNft is ERC721 {
     }
 
     // Get woman level using into NftFamily for create Family token
-    function womanLevel() external view returns (uint8) {
-        return womanNft[0].Level;
+    function womanLevel(uint256 womanIdArray) external view returns (uint8) {
+        return womanNft[womanIdArray].Level;
     } 
 
     // Get woman Id

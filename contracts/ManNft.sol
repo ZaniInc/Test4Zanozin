@@ -34,13 +34,13 @@ contract ManNft is ERC721 {
     }
 
     // Get man level using into NftFamily for create Family token
-    function manLevel() external view returns (uint8) {
-        return manNft[0].Level;
+    function manLevel(uint256 manIdArray) external view returns (uint8) {
+        return manNft[manIdArray].Level;
     }
 
     // Get man lastname using into NftFamily for create Family token
-    function manLastname() external view returns (string memory) {
-        return manNft[0].LastName;
+    function manLastname(uint256 manIdArray) external view returns (string memory) {
+        return manNft[manIdArray].LastName;
     }
 
     // Get DadId

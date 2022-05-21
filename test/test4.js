@@ -56,7 +56,7 @@ let WomanNft
 
  it("set family field nft" , async function () {
 
-    let familyNftt = await nftfamily.createFamilyNFT(mannft.address , womannft.address );
+    let familyNftt = await nftfamily.createFamilyNFT(mannft.address , womannft.address , 0,0);
     await familyNftt.wait();
     // expect(await TokenForPayy.connect(acc2).balanceOf(acc2.address)).to.eq(10000);
     console.log("Family NFT :",await nftfamily.showFamilyNft() );
@@ -65,7 +65,7 @@ let WomanNft
 
    it("set kid nft" , async function () {
 
-    let kid = await kidnft.generateNftKid(4,"Nikita",nftfamily.address,mannft.address,womannft.address);
+    let kid = await kidnft.generateNftKid(4,"Nikita",nftfamily.address,mannft.address,womannft.address,0);
     await kid.wait();
     // expect(await TokenForPayy.connect(acc2).balanceOf(acc2.address)).to.eq(10000);
     console.log("Kid NFT :",await kidnft.showKid() );

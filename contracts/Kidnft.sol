@@ -6,8 +6,8 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
 interface famNFT {
 
-    function getFamilyLevel () external view returns (uint8);
-    function getFamilyLastname () external view returns (string memory);
+    function getFamilyLevel (uint256 familyTokenId) external view returns (uint8);
+    function getFamilyLastname (uint256 familyTokenId) external view returns (string memory);
 }
 
 interface DadId {
@@ -35,9 +35,9 @@ contract Kidnft is ERC721 {
     Kid [] kidArray;
 
     // Generate Kid Nft , take Level and Lastname from Family token
-    function generateNftKid ( uint8 _age ,string memory _name  , famNFT nft , DadId dadAddress , MomId momAddress) public {
-        kidArray.push(Kid(_age,nft.getFamilyLevel(),
-        _name,nft.getFamilyLastname(),
+    function generateNftKid ( uint8 _age ,string memory _name  , famNFT nft , DadId dadAddress , MomId momAddress , uint256 familyTokenId) public {
+        kidArray.push(Kid(_age,nft.getFamilyLevel(familyTokenId),
+        _name,nft.getFamilyLastname(familyTokenId),
         dadAddress.ShowDadId(msg.sender),
         momAddress.ShowWomanId(msg.sender)));
     }
