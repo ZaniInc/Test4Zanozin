@@ -2,9 +2,17 @@
 
 pragma solidity ^0.8.7;
 
-import "./NftFamily.sol";
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
-contract Kidnft is NftFamily { 
+interface famNFT {
+
+    function getFamilyLevel () external view returns (uint8);
+    function getFamilyLastname () external view returns (string memory);
+}
+
+contract Kidnft is ERC721 { 
+
+    constructor () ERC721( "KIDNFT" , "KFT") {}
 
     struct Kid {
          uint8 Age;
@@ -16,8 +24,8 @@ contract Kidnft is NftFamily {
     Kid [] kidArray;
 
     // Generate Kid Nft
-    function generateNftKid ( uint8 _age ,string memory _name , uint8 familyId) public {
-        kidArray.push(Kid(_age,_familyTokens[familyId].Level,_name,_familyTokens[familyId].LastName));
+    function generateNftKid ( uint8 _age ,string memory _name  , famNFT nft ) public {
+        kidArray.push(Kid(_age,nft.getFamilyLevel(),_name,nft.getFamilyLastname()));
     }
 
     // Show Kid Nft

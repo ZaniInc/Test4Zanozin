@@ -2,9 +2,11 @@
 
 pragma solidity ^0.8.7;
 
-import "./ManNft.sol";
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
-contract WomanNft is ManNft  { 
+contract WomanNft is ERC721 {
+
+    constructor () ERC721( "WOMANNFT" , "WFT") {}
 
      struct Woman {
          uint8 Age;
@@ -25,6 +27,10 @@ contract WomanNft is ManNft  {
     function showWoman() public view returns (Woman [] memory) {
         return womanNft ;
     }
+    // Get woman level using into NftFamily for create Family token
+    function womanLevel() external view returns (uint8) {
+        return womanNft[0].Level;
+    } 
 
 
 }
