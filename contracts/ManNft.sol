@@ -15,12 +15,16 @@ contract ManNft is ERC721 {
          string LastName;        
     }
 
+    // Using adress of owner to watch dadId
+    mapping(address=>uint256)_dadId;
+
     Man [] manNft;
 
     // Generate Nft Man
-    function generateNftMan (uint8 age , uint8 level , string memory _name , string memory lastname ) public returns(bool) {
+    function generateNftMan (uint8 age , uint8 level , string memory _name , string memory lastname , address owner ,uint256 DadId) public {
         manNft.push(Man(age,level,_name,lastname));
-        return true;
+        _safeMint(owner ,DadId );
+        _dadId[owner] = DadId;
     }
 
     // Show Man nft token
@@ -36,6 +40,11 @@ contract ManNft is ERC721 {
     // Get man lastname using into NftFamily for create Family token
     function manLastname() external view returns (string memory) {
         return manNft[0].LastName;
-    } 
+    }
+
+    // Get DadId
+    function ShowDadId (address owner) external view returns(uint256) {
+        return _dadId[owner];
+    }
 
 }

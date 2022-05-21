@@ -17,20 +17,29 @@ contract WomanNft is ERC721 {
 
     Woman [] womanNft;
 
+    mapping(address=>uint256)_womanId;
+
     // Generate Nft Man
-    function generateNftWoman (uint8 age , uint8 level , string memory _name , string memory lastname ) public returns(bool) {
+    function generateNftWoman (uint8 age , uint8 level , string memory _name , string memory lastname , address owner, uint256 WomanId ) public {
         womanNft.push(Woman(age,level,_name,lastname));
-        return true;
+        _safeMint(owner,WomanId);
+        _womanId[owner] = WomanId;
     }
 
     // Show Woman Nft
     function showWoman() public view returns (Woman [] memory) {
         return womanNft ;
     }
+
     // Get woman level using into NftFamily for create Family token
     function womanLevel() external view returns (uint8) {
         return womanNft[0].Level;
     } 
+
+    // Get woman Id
+    function ShowWomanId (address owner) external view returns(uint256) {
+        return _womanId[owner];
+    }
 
 
 }
