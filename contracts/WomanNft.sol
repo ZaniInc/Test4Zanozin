@@ -15,8 +15,10 @@ contract WomanNft is ERC721 {
          string LastName;        
     }
 
+    // Save womans here
     Woman [] womanNft;
 
+    // Save womans Id for transfer it to kid
     mapping(address=>uint256)_womanId;
 
     // Generate Nft Man

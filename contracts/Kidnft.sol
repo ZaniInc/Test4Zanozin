@@ -31,6 +31,7 @@ contract Kidnft is ERC721 {
          uint256 MomId;        
     }
 
+    // Save kids here
     Kid [] kidArray;
 
     // Generate Kid Nft , take Level and Lastname from Family token

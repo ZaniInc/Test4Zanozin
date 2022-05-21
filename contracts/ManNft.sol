@@ -15,9 +15,10 @@ contract ManNft is ERC721 {
          string LastName;        
     }
 
-    // Using adress of owner to watch dadId
+    // Save mans Id for transfer it to kid
     mapping(address=>uint256)_dadId;
 
+    // Save mans here
     Man [] manNft;
 
     // Generate Nft Man
