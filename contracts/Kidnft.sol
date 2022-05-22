@@ -34,12 +34,24 @@ contract Kidnft is ERC721 {
     // Save kids here
     Kid [] kidArray;
 
+    // Save Kid Id after mint
+    mapping(address=>uint256)_kidIdSave;
+
     // Generate Kid Nft , take Level and Lastname from Family token
-    function generateNftKid ( uint8 _age ,string memory _name  , famNFT nft , DadId dadAddress , MomId momAddress , uint256 familyTokenId) public {
+    function generateNftKid ( uint8 _age ,
+    string memory _name,
+    famNFT nft,
+    DadId dadAddress,
+    MomId momAddress,
+    uint256 familyTokenId,
+    address owner,
+    uint256 _kidId) public {
         kidArray.push(Kid(_age,nft.getFamilyLevel(familyTokenId),
         _name,nft.getFamilyLastname(familyTokenId),
         dadAddress.ShowDadId(msg.sender),
         momAddress.ShowWomanId(msg.sender)));
+        _safeMint(owner,_kidId);
+        _kidIdSave[owner] = _kidId;
     }
 
     // Show Kid Nft

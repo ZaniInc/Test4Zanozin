@@ -15,14 +15,20 @@ contract ManNft is ERC721 {
          string LastName;        
     }
 
-    // Save mans Id for transfer it to kid
+    // Save mans Id AFTER MINT and transfer it to kid
     mapping(address=>uint256)_dadId;
 
     // Save mans here
     Man [] manNft;
 
     // Generate Nft Man
-    function generateNftMan (uint8 age , uint8 level , string memory _name , string memory lastname , address owner ,uint256 DadId) public {
+    function generateNftMan (
+        uint8 age,
+        uint8 level,
+        string memory _name,
+        string memory lastname,
+        address owner,
+        uint256 DadId) public {
         manNft.push(Man(age,level,_name,lastname));
         _safeMint(owner ,DadId );
         _dadId[owner] = DadId;

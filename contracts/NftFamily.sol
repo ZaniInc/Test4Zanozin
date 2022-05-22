@@ -31,9 +31,20 @@ contract NftFamily is ERC721 {
     // Family tokens save here
     NFTFamily [] _familyTokens;
 
+    // Save NFTFamily Id after mint
+    mapping(address=>uint256)_nftFamilyId;
+
     // Generate token NFTfamily which contains level from parents and lastname from man
-    function createFamilyNFT (Man mannft , Woman womannft , uint256 womanIndexArray , uint256 manIndexArray) public {
+    function createFamilyNFT (
+        Man mannft,
+        Woman womannft,
+        uint256 womanIndexArray,
+        uint256 manIndexArray,
+        address owner,
+        uint256 TokenId) public {
         _familyTokens.push(NFTFamily(1,(mannft.manLevel(manIndexArray) + womannft.womanLevel(womanIndexArray)) / 2, mannft.manLastname(manIndexArray))) ;
+        _safeMint(owner,TokenId);
+        _nftFamilyId[owner] = TokenId;
     }
 
     // show token NFTfamily

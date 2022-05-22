@@ -18,11 +18,17 @@ contract WomanNft is ERC721 {
     // Save womans here
     Woman [] womanNft;
 
-    // Save womans Id for transfer it to kid
+    // Save womans Id AFTER MINT for transfer it to kid
     mapping(address=>uint256)_womanId;
 
     // Generate Nft Man
-    function generateNftWoman (uint8 age , uint8 level , string memory _name , string memory lastname , address owner, uint256 WomanId ) public {
+    function generateNftWoman (
+        uint8 age,
+        uint8 level,
+        string memory _name,
+        string memory lastname,
+        address owner,
+        uint256 WomanId ) public {
         womanNft.push(Woman(age,level,_name,lastname));
         _safeMint(owner,WomanId);
         _womanId[owner] = WomanId;
